@@ -3,6 +3,8 @@
 namespace App\Helper;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Pagination\AbstractPaginator;
 use streamWrapper;
 
 
@@ -21,15 +23,34 @@ class GlobalResponse
 
     public static function success($data, $message, $status): JsonResponse
     {
-        $response = new static($data, $message, $status);
+        // Case 1: Laravel Resource Collection (pagination সহ)
+        if ($data instanceof ResourceCollection) {
+            return $data->additional([
+                'success' => true,
+                'message' => $message,
+                'status'  => $status,
+            ])->response()->setStatusCode($status);
+        }
 
-        if (!is_array($data)) {
-            $data = [];
+        // Case 2: Paginator without Resource
+        if ($data instanceof AbstractPaginator) {
+            return response()->json([
+                'success' => true,
+                'data'    => $data->items(),
+                'meta'    => [
+                    'current_page' => $data->currentPage(),
+                    'last_page'    => $data->lastPage(),
+                    'per_page'     => $data->perPage(),
+                    'total'        => $data->total(),
+                ],
+                'message' => $message,
+                'status'  => $status,
+            ], $status);
         }
 
         return response()->json([
             "success" => true,
-            "data" => $response->data,
+            "data" => $data,
             "message" => $message,
             "status" => $status
         ], $status);

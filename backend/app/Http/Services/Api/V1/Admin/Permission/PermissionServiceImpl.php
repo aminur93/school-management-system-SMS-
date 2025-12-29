@@ -12,37 +12,37 @@ class PermissionServiceImpl implements PermissionService
 {
 	public function index(Request $request)
 	{
-		$query = Permission::query();
+		$query = (new Permission)
+        ->setConnection('mysql_read_2')
+        ->newQuery();
 
-        // Sorting (secure)
         $sortableColumns = ['id', 'name', 'title', 'created_at'];
 
-        $sortBy = $request->get('sortBy', 'id');
-        $sortDesc = $request->get('sortDesc', 'true') === 'true' ? 'desc' : 'asc';
+        $sortBy = in_array($request->get('sortBy'), $sortableColumns)
+            ? $request->get('sortBy')
+            : 'id';
 
-        if (! in_array($sortBy, $sortableColumns)) {
-            $sortBy = 'id';
-        }
+        $sortDesc = $request->get('sortDesc') === 'true' ? 'desc' : 'asc';
 
         $query->orderBy($sortBy, $sortDesc);
 
-        // Search
         if ($search = $request->get('search')) {
-            $query->where('name', 'like', "%{$search}%")
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
                 ->orWhere('title', 'like', "%{$search}%");
+            });
         }
 
-        // Pagination
-        $itemsPerPage = (int) $request->get('itemsPerPage', 10);
-        $permissions = $query->paginate($itemsPerPage);
+        $permissions = $query->paginate(
+            (int) $request->get('itemsPerPage', 10)
+        );
 
         return PermissionResource::collection($permissions);
 	}
 
 	public function getAllPermissions()
 	{
-		$permissions = Permission::orderBy('id', 'desc')->get();
-
+		$permissions = Permission::orderBy('id', 'desc')->get(); // keep as Collection
         return PermissionResource::collection($permissions);
 	}
 

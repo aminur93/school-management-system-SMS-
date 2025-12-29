@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Helper\GlobalResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Admin\PermissionRequest;
+use App\Http\Resources\Api\V1\Admin\PermissionResource;
 use App\Http\Services\Api\V1\Admin\Permission\PermissionService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use PDO;
+use Spatie\Permission\Models\Permission;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PermissionController extends Controller
@@ -24,7 +28,7 @@ class PermissionController extends Controller
 
     public function index(Request $request)
     {
-        //Convert pagination query to boolean
+        // Convert pagination query to boolean
         $pagination = filter_var($request->get('pagination', true), FILTER_VALIDATE_BOOLEAN);
 
         // Fetch permissions via service

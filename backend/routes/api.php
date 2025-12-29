@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\MediumController;
 use App\Http\Controllers\Api\V1\Admin\PermissionController;
 use App\Http\Controllers\Api\V1\Admin\RoleController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
@@ -39,7 +40,16 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
 /**
  * Admin api route start
 */
-Route::group(['prefix' => 'v1/admin', 'middleware' => ['throttle:api']], function(){
+Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*Medium route start*/
+    Route::get('medium', [MediumController::class, 'index']);
+    Route::post('medium', [MediumController::class, 'store']);
+    Route::get('medium/{id}', [MediumController::class, 'show']);
+    Route::put('medium/{id}', [MediumController::class, 'update']);
+    Route::delete('medium/{id}', [MediumController::class, 'destroy']);
+    Route::patch('medium/status-update/{id}', [MediumController::class, 'statusUpdate']);
+    /*Medium route end*/
     
     /*user management -> user route start*/
     Route::get('user', [UserController::class, 'index']);
