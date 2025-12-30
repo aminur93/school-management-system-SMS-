@@ -3,18 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Medium extends Model
+class SchoolClass extends Model
 {
     protected $connection = 'mysql_shard_0'; // shard connection
-
-    protected $table = 'mediums';
-
+    protected $table = 'school_classes';
+    
     protected $fillable = [
+        'medium_id',
         'name',
         'code',
-        'description',
+        'order_number',
         'is_active',
         'created_by'
     ];

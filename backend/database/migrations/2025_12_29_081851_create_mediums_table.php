@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code', 20)->unique();
             $table->longText('description')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->string('created_by', 50)->nullable();
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }

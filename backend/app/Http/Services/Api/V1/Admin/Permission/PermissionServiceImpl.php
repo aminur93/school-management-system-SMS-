@@ -13,7 +13,7 @@ class PermissionServiceImpl implements PermissionService
 	public function index(Request $request)
 	{
 		$query = (new Permission)
-        ->setConnection('mysql_read_2')
+        ->setConnection('mysql_read_1')
         ->newQuery();
 
         $sortableColumns = ['id', 'name', 'title', 'created_at'];

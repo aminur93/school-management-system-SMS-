@@ -8,6 +8,8 @@ use App\Http\Services\Api\V1\Admin\Permission\PermissionService;
 use App\Http\Services\Api\V1\Admin\Permission\PermissionServiceImpl;
 use App\Http\Services\Api\V1\Admin\Role\RoleService;
 use App\Http\Services\Api\V1\Admin\Role\RoleServiceImpl;
+use App\Http\Services\Api\V1\Admin\SchoolClass\SchoolClassService;
+use App\Http\Services\Api\V1\Admin\SchoolClass\SchoolClassServiceImpl;
 use App\Http\Services\Api\V1\Admin\User\UserService;
 use App\Http\Services\Api\V1\Admin\User\UserServiceImpl;
 use App\Http\Services\Api\V1\Auth\AuthService;
@@ -44,6 +46,11 @@ class ServiceBindingProvider extends ServiceProvider
         $this->app->bind(
             MediumService::class,
             MediumServiceImpl::class
+        );
+
+        $this->app->bind(
+            SchoolClassService::class,
+            SchoolClassServiceImpl::class
         );
     }
 

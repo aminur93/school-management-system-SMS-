@@ -118,6 +118,55 @@ return [
             ]) : [],
         ],
 
+        'mysql_shard_0' => [
+            'driver' => 'mysql',
+
+            'host' => env('DB_SHARD_0_HOST', '127.0.0.1'),
+            'port' => env('DB_SHARD_0_PORT', '3308'),
+
+
+            'database' => env('DB_SHARD_0_DATABASE'),
+            'username' => env('DB_SHARD_0_USERNAME'),
+            'password' => env('DB_SHARD_0_PASSWORD'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                PDO::ATTR_PERSISTENT => true,
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ]) : [],
+        ],
+
+        'mysql_shard_1' => [
+            'driver' => 'mysql',
+            'url' => env('DB_URL'),
+
+            'host' => env('DB_READ2_HOST', '127.0.0.1'),
+            'port' => env('DB_READ2_PORT', '3308'),
+
+
+            'database' => env('DB_DATABASE', 'laravel_db_shard_1'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                PDO::ATTR_PERSISTENT => true,
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ]) : [],
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

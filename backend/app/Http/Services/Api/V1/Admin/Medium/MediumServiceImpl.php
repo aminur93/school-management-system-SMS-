@@ -17,16 +17,16 @@ class MediumServiceImpl implements MediumService
         $isActive = $request->get('is_active'); // 0 | 1 | null
         $search   = $request->get('search');    // string | null
 
-        // 1️⃣ Call Stored Procedure
+        // 1 Call Stored Procedure
         $rows = DB::select(
             'CALL sp_get_mediums(?, ?)',
             [$isActive, $search]
         );
 
-        // 2️⃣ Convert to Collection
+        // 2 Convert to Collection
         $collection = collect($rows);
 
-        // 3️⃣ Sorting
+        // 3 Sorting
         $sortableColumns = ['id', 'name', 'code', 'created_at'];
         $sortBy = $request->get('sortBy', 'id');
         $sortDesc = $request->get('sortDesc', 'true') === 'true';
@@ -41,7 +41,7 @@ class MediumServiceImpl implements MediumService
             $collection = $collection->reverse();
         }
 
-        // 4️⃣ Manual Pagination
+        // 4 Manual Pagination
         $perPage = (int) $request->get('itemsPerPage', 10);
         $page    = (int) $request->get('page', 1);
 
@@ -56,7 +56,7 @@ class MediumServiceImpl implements MediumService
             ]
         );
 
-        // 5️⃣ Resource response
+        // 5 Resource response
         return MediumResource::collection($paginator);
     }
 
