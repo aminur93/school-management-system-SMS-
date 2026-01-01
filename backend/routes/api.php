@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Admin\MediumController;
 use App\Http\Controllers\Api\V1\Admin\PermissionController;
 use App\Http\Controllers\Api\V1\Admin\RoleController;
 use App\Http\Controllers\Api\V1\Admin\SchoolClassController;
+use App\Http\Controllers\Api\V1\Admin\SectionController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -42,6 +43,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*section route start*/
+    Route::get('section', [SectionController::class, 'index']);
+    Route::post('section', [SectionController::class, 'store']);
+    Route::get('section/{id}', [SectionController::class, 'show']);
+    Route::put('section/{id}', [SectionController::class, 'update']);
+    Route::delete('section/{id}', [SectionController::class, 'destroy']);
+    Route::patch('section/status-update/{id}', [SectionController::class, 'statusUpdate']);
+    /*section route end*/
 
     /*school-class route start*/
     Route::get('school-class', [SchoolClassController::class, 'index']);

@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api\V1\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SchoolClassResource extends JsonResource
+class SectionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,14 @@ class SchoolClassResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'school_class' => new SchoolClassResource($this->whenLoaded('schoolClass')),
+            'school_class_id' => $this->school_class_id,
             'name' => $this->name,
-            'code' => $this->code,
-            'order_number' => $this->order_number,
+            'capacity' => $this->capacity,
+            'room_number' => $this->room_number,
             'is_active' => $this->is_active,
-            'medium' => new MediumResource($this->whenLoaded('medium')),
+            'created_by' => $this->created_by,
+            'user' => new UserResource($this->whenLoaded('user')),
         ];
     }
 }

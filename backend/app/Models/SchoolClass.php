@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SchoolClass extends Model
 {
-    protected $connection = 'mysql_shard_0'; // shard connection
+    //protected $connection = 'mysql_shard_0'; // shard connection
     protected $table = 'school_classes';
     
     protected $fillable = [
@@ -17,4 +17,9 @@ class SchoolClass extends Model
         'is_active',
         'created_by'
     ];
+
+    public function medium()
+    {
+        return $this->belongsTo(Medium::class, 'medium_id');
+    }
 }

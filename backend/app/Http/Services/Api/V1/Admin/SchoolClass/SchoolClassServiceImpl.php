@@ -12,7 +12,7 @@ class SchoolClassServiceImpl implements SchoolClassService
 {
     public function index(Request $request)
     {
-        $schoolClasses = SchoolClass::with('mediums');
+        $schoolClasses = SchoolClass::with('medium');
 
          // Sorting (secure)
         $sortableColumns = ['id', 'name', 'code', 'order_number', 'created_at'];
@@ -42,7 +42,7 @@ class SchoolClassServiceImpl implements SchoolClassService
 
     public function getAllClasses()
     {
-        $schoolClasses = SchoolClass::with('mediums')->latest()->get();
+        $schoolClasses = SchoolClass::with('medium')->latest()->get();
 
         return SchoolClassResource::collection($schoolClasses);
     }
@@ -86,7 +86,7 @@ class SchoolClassServiceImpl implements SchoolClassService
 
     public function show(int $id)
     {
-        $schoolClasses = SchoolClass::with('mediums')->findOrFail($id);
+        $schoolClasses = SchoolClass::with('medium')->findOrFail($id);
 
         return new SchoolClassResource($schoolClasses);
     }
@@ -116,7 +116,7 @@ class SchoolClassServiceImpl implements SchoolClassService
                 $schoolClasses->is_active = $request->is_active;
             }
 
-            $schoolClasses->updated_by = Auth::id() ?? null;
+            $schoolClasses->created_by = Auth::id() ?? null;
 
             $schoolClasses->save();
 
@@ -176,7 +176,7 @@ class SchoolClassServiceImpl implements SchoolClassService
 
             $schoolClasses->is_active = ! $schoolClasses->is_active;
 
-            $schoolClasses->updated_by = Auth::id() ?? null;
+            $schoolClasses->created_by = Auth::id() ?? null;
 
             $schoolClasses->save();
 

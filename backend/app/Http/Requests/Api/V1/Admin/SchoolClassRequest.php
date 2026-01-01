@@ -97,9 +97,6 @@ class SchoolClassRequest extends FormRequest
                 'sometimes',
                 'string',
                 'max:50',
-                Rule::unique('school_classes', 'code')
-                    ->where('medium_id', $this->medium_id)
-                    ->ignore($classId),
             ],
 
             'order_number' => [
