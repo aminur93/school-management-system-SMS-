@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Services\Api\V1\Admin\AcademicYear\AcademicYearService;
+use App\Http\Services\Api\V1\Admin\AcademicYear\AcademicYearServiceImpl;
 use App\Http\Services\Api\V1\Admin\Medium\MediumService;
 use App\Http\Services\Api\V1\Admin\Medium\MediumServiceImpl;
 use App\Http\Services\Api\V1\Admin\Permission\PermissionService;
@@ -58,6 +60,11 @@ class ServiceBindingProvider extends ServiceProvider
         $this->app->bind(
             SectionService::class,
             SectionServiceImpl::class
+        );
+
+        $this->app->bind(
+            AcademicYearService::class,
+            AcademicYearServiceImpl::class
         );
     }
 

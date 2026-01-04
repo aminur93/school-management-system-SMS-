@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\AcademicYearController;
 use App\Http\Controllers\Api\V1\Admin\MediumController;
 use App\Http\Controllers\Api\V1\Admin\PermissionController;
 use App\Http\Controllers\Api\V1\Admin\RoleController;
@@ -43,6 +44,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*academic year route start*/
+    Route::get('academic-year', [AcademicYearController::class, 'index']);
+    Route::post('academic-year', [AcademicYearController::class, 'store']);
+    Route::get('academic-year/{id}', [AcademicYearController::class, 'show']);
+    Route::put('academic-year/{id}', [AcademicYearController::class, 'update']);
+    Route::delete('academic-year/{id}', [AcademicYearController::class, 'destroy']);
+    Route::patch('academic-year/status-update/{id}', [AcademicYearController::class, 'changeStatus']);
+    /*academic year route end*/
 
     /*section route start*/
     Route::get('section', [SectionController::class, 'index']);
