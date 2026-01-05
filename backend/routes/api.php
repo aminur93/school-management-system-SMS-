@@ -5,7 +5,9 @@ use App\Http\Controllers\Api\V1\Admin\MediumController;
 use App\Http\Controllers\Api\V1\Admin\PermissionController;
 use App\Http\Controllers\Api\V1\Admin\RoleController;
 use App\Http\Controllers\Api\V1\Admin\SchoolClassController;
+use App\Http\Controllers\Api\V1\Admin\SchoolController;
 use App\Http\Controllers\Api\V1\Admin\SectionController;
+use App\Http\Controllers\Api\V1\Admin\StudentController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -44,6 +46,24 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*student route start*/
+    Route::get('student', [StudentController::class, 'index']);
+    Route::post('student', [StudentController::class, 'store']);
+    Route::get('student/{id}', [StudentController::class, 'show']);
+    Route::put('student/{id}', [StudentController::class, 'update']);
+    Route::patch('student/change-status/{id}', [StudentController::class, 'changeStatus']);
+    Route::delete('student/{id}', [StudentController::class, 'destroy']);
+    /*student route end*/
+
+    /*school route start*/
+    Route::get('school', [SchoolController::class, 'index']);
+    Route::post('school', [SchoolController::class, 'store']);
+    Route::get('school/{id}', [SchoolController::class, 'show']);
+    Route::put('school/{id}', [SchoolController::class, 'update']);
+    Route::patch('school/change-status/{id}', [SchoolController::class, 'changeStatus']);
+    Route::delete('school/{id}', [SchoolController::class, 'destroy']);
+    /*school route end*/
 
     /*academic year route start*/
     Route::get('academic-year', [AcademicYearController::class, 'index']);
