@@ -6,6 +6,8 @@ use App\Http\Services\Api\V1\Admin\AcademicYear\AcademicYearService;
 use App\Http\Services\Api\V1\Admin\AcademicYear\AcademicYearServiceImpl;
 use App\Http\Services\Api\V1\Admin\Medium\MediumService;
 use App\Http\Services\Api\V1\Admin\Medium\MediumServiceImpl;
+use App\Http\Services\Api\V1\Admin\ParentGuardian\ParentGuardianService;
+use App\Http\Services\Api\V1\Admin\ParentGuardian\ParentGuardianServiceImpl;
 use App\Http\Services\Api\V1\Admin\Permission\PermissionService;
 use App\Http\Services\Api\V1\Admin\Permission\PermissionServiceImpl;
 use App\Http\Services\Api\V1\Admin\Role\RoleService;
@@ -79,6 +81,11 @@ class ServiceBindingProvider extends ServiceProvider
         $this->app->bind(
             StudentService::class,
             StudentServiceImpl::class
+        );
+
+        $this->app->bind(
+            ParentGuardianService::class,
+            ParentGuardianServiceImpl::class
         );
     }
 

@@ -12,7 +12,7 @@ class StudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -42,7 +42,7 @@ class StudentRequest extends FormRequest
             'student_id' => ['required', 'string', 'max:20', 'unique:students,student_id'],
             'school_id' => ['required', 'integer', 'exists:schools,id'],
             'medium_id' => ['required', 'integer', 'exists:mediums,id'],
-            'current_class_id' => ['nullable', 'integer', 'exists:classes,id'],
+            'current_class_id' => ['nullable', 'integer', 'exists:school_classes,id'],
             'current_section_id' => ['nullable', 'integer', 'exists:sections,id'],
             'current_academic_year_id' => ['nullable', 'integer', 'exists:academic_years,id'],
 
@@ -98,7 +98,7 @@ class StudentRequest extends FormRequest
 
             'school_id' => ['sometimes', 'integer', 'exists:schools,id'],
             'medium_id' => ['sometimes', 'integer', 'exists:mediums,id'],
-            'current_class_id' => ['nullable', 'integer', 'exists:classes,id'],
+            'current_class_id' => ['nullable', 'integer', 'exists:school_classes,id'],
             'current_section_id' => ['nullable', 'integer', 'exists:sections,id'],
             'current_academic_year_id' => ['nullable', 'integer', 'exists:academic_years,id'],
 

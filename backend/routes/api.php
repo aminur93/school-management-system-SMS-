@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\Admin\AcademicYearController;
 use App\Http\Controllers\Api\V1\Admin\MediumController;
+use App\Http\Controllers\Api\V1\Admin\ParentGuardianController;
 use App\Http\Controllers\Api\V1\Admin\PermissionController;
 use App\Http\Controllers\Api\V1\Admin\RoleController;
 use App\Http\Controllers\Api\V1\Admin\SchoolClassController;
@@ -46,6 +47,14 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*parent & guardian route start*/
+    Route::get('parent-guardian', [ParentGuardianController::class, 'index']);
+    Route::post('parent-guardian', [ParentGuardianController::class, 'store']);
+    Route::get('parent-guardian/{id}', [ParentGuardianController::class, 'show']);
+    Route::put('parent-guardian/{id}', [ParentGuardianController::class, 'update']);
+    Route::delete('parent-guardian/{id}', [ParentGuardianController::class, 'destroy']);
+    /*parent & guardian route end*/
 
     /*student route start*/
     Route::get('student', [StudentController::class, 'index']);
