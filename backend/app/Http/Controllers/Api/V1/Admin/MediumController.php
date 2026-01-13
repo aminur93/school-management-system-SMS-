@@ -94,7 +94,7 @@ class MediumController extends Controller
 
         }catch (ModelNotFoundException $exception){
 
-            return GlobalResponse::error("Permission not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
+            return GlobalResponse::error("Medium not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
 
         }catch (\Exception $exception){
 

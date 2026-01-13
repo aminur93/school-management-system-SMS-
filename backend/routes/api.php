@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Admin\SchoolClassController;
 use App\Http\Controllers\Api\V1\Admin\SchoolController;
 use App\Http\Controllers\Api\V1\Admin\SectionController;
 use App\Http\Controllers\Api\V1\Admin\StudentController;
+use App\Http\Controllers\Api\V1\Admin\StudentEnrollmentController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -47,6 +48,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*student enrollment route start*/
+    Route::get('student-enrollment', [StudentEnrollmentController::class, 'index']);
+    Route::post('student-enrollment', [StudentEnrollmentController::class, 'store']);
+    Route::get('student-enrollment/{id}', [StudentEnrollmentController::class, 'show']);
+    Route::put('student-enrollment/{id}', [StudentEnrollmentController::class, 'update']);
+    Route::patch('student-enrollment/change-status/{id}', [StudentEnrollmentController::class, 'changeStatus']);
+    Route::delete('student-enrollment/{id}', [StudentEnrollmentController::class, 'destroy']);
+    /*student enrollment route end*/
 
     /*parent & guardian route start*/
     Route::get('parent-guardian', [ParentGuardianController::class, 'index']);
