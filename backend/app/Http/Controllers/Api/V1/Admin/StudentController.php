@@ -86,7 +86,7 @@ class StudentController extends Controller
 
             $student = $this->studentService->update($request, $id);
 
-            return GlobalResponse::success($student, "Student year update successful", \Illuminate\Http\Response::HTTP_OK);
+            return GlobalResponse::success($student, "Student year update successful", Response::HTTP_OK);
 
         }catch (ValidationException $exception){
 
@@ -132,7 +132,7 @@ class StudentController extends Controller
 
             return GlobalResponse::error("Student year not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
 
-        }catch (\Exception $exception){
+        }catch (Exception $exception){
 
             return GlobalResponse::error("", $exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }

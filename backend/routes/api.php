@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\Admin\SchoolController;
 use App\Http\Controllers\Api\V1\Admin\SectionController;
 use App\Http\Controllers\Api\V1\Admin\StudentController;
 use App\Http\Controllers\Api\V1\Admin\StudentEnrollmentController;
+use App\Http\Controllers\Api\V1\Admin\StudentPromotionController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -48,6 +49,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*Student promotion route start*/
+    Route::get('student-promotion', [StudentPromotionController::class, 'index']);
+    Route::post('student-promotion', [StudentPromotionController::class, 'store']);
+    Route::get('student-promotion/{id}', [StudentPromotionController::class, 'show']);
+    Route::put('student-promotion/{id}', [StudentPromotionController::class, 'update']);
+    Route::patch('student-promotion/change-status/{id}', [StudentPromotionController::class, 'changeStatus']);
+    Route::delete('student-promotion/{id}', [StudentPromotionController::class, 'destroy']);
+    /*Student promotion route end*/
 
     /*student enrollment route start*/
     Route::get('student-enrollment', [StudentEnrollmentController::class, 'index']);
