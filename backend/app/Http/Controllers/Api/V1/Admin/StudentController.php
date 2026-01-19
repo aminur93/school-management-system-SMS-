@@ -120,7 +120,7 @@ class StudentController extends Controller
         }
     }
 
-     public function changeStatus(Request $request, int $id)
+    public function changeStatus(Request $request, int $id)
     {
         try {
 

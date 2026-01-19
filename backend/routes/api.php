@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\Admin\SectionController;
 use App\Http\Controllers\Api\V1\Admin\StudentController;
 use App\Http\Controllers\Api\V1\Admin\StudentEnrollmentController;
 use App\Http\Controllers\Api\V1\Admin\StudentPromotionController;
+use App\Http\Controllers\Api\V1\Admin\TransferCertificateController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -49,6 +50,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*transfer certificate route start*/
+    Route::get('transfer-certificate', [TransferCertificateController::class, 'index']);
+    Route::post('transfer-certificate', [TransferCertificateController::class, 'store']);
+    Route::get('transfer-certificate/{id}', [TransferCertificateController::class, 'show']);
+    Route::put('transfer-certificate/{id}', [TransferCertificateController::class, 'update']);
+    Route::patch('transfer-certificate/{id}', [TransferCertificateController::class, 'changeStatus']);
+    Route::delete('transfer-certificate/{id}', [TransferCertificateController::class, 'destroy']);
+    /*transfer certificate route end*/
 
     /*Student promotion route start*/
     Route::get('student-promotion', [StudentPromotionController::class, 'index']);

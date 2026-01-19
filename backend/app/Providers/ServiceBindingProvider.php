@@ -24,6 +24,8 @@ use App\Http\Services\Api\V1\Admin\StudentEnrollment\StudentEnrollmentService;
 use App\Http\Services\Api\V1\Admin\StudentEnrollment\StudentEnrollmentServiceImpl;
 use App\Http\Services\Api\V1\Admin\StudentPromotion\StudentPromotionService;
 use App\Http\Services\Api\V1\Admin\StudentPromotion\StudentPromotionServiceImpl;
+use App\Http\Services\Api\V1\Admin\TransferCertificate\TransferCertificateService;
+use App\Http\Services\Api\V1\Admin\TransferCertificate\TransferCertificateServiceImpl;
 use App\Http\Services\Api\V1\Admin\User\UserService;
 use App\Http\Services\Api\V1\Admin\User\UserServiceImpl;
 use App\Http\Services\Api\V1\Auth\AuthService;
@@ -100,6 +102,11 @@ class ServiceBindingProvider extends ServiceProvider
         $this->app->bind(
             StudentPromotionService::class,
             StudentPromotionServiceImpl::class
+        );
+
+        $this->app->bind(
+            TransferCertificateService::class,
+            TransferCertificateServiceImpl::class
         );
     }
 
