@@ -27,7 +27,7 @@ class StudentController extends Controller
         // Convert pagination query to boolean
         $pagination = filter_var($request->get('pagination', true), FILTER_VALIDATE_BOOLEAN);
 
-        // Fetch student year via service
+        // Fetch student via service
         $students = $pagination
             ? $this->studentService->index($request)
             : $this->studentService->getAllStudents();
@@ -35,8 +35,8 @@ class StudentController extends Controller
 
         // Return unified response
         $message = $pagination
-            ? "All student year fetched successfully with pagination"
-            : "All student year fetched successfully";
+            ? "All student fetched successfully with pagination"
+            : "All student fetched successfully";
 
         return GlobalResponse::success($students, $message, Response::HTTP_OK);
     }
@@ -46,7 +46,7 @@ class StudentController extends Controller
         try {
            $student = $this->studentService->store($request);
 
-           return GlobalResponse::success($student, "Student year Store successful", Response::HTTP_CREATED);
+           return GlobalResponse::success($student, "Student Store successful", Response::HTTP_CREATED);
 
         } catch (ValidationException $exception) {
 
@@ -68,11 +68,11 @@ class StudentController extends Controller
 
             $student = $this->studentService->show($id);
 
-            return GlobalResponse::success($student, "Student year fetch successful", Response::HTTP_OK);
+            return GlobalResponse::success($student, "Student fetch successful", Response::HTTP_OK);
 
         }catch (ModelNotFoundException $exception){
 
-            return GlobalResponse::error("Student year not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
+            return GlobalResponse::error("Student not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
 
         }catch (\Exception $exception){
 
@@ -86,7 +86,7 @@ class StudentController extends Controller
 
             $student = $this->studentService->update($request, $id);
 
-            return GlobalResponse::success($student, "Student year update successful", Response::HTTP_OK);
+            return GlobalResponse::success($student, "Student update successful", Response::HTTP_OK);
 
         }catch (ValidationException $exception){
 
@@ -94,7 +94,7 @@ class StudentController extends Controller
 
         }catch (ModelNotFoundException $exception){
 
-            return GlobalResponse::error("Student year not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
+            return GlobalResponse::error("Student not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
 
         }catch (\Exception $exception){
 
@@ -108,11 +108,11 @@ class StudentController extends Controller
 
             $this->studentService->destroy($id);
 
-            return GlobalResponse::success("", "Student year deleted successfully", Response::HTTP_NO_CONTENT);
+            return GlobalResponse::success("", "Student deleted successfully", Response::HTTP_NO_CONTENT);
 
         } catch (ModelNotFoundException $exception) {
 
-            return GlobalResponse::error("Student year not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
+            return GlobalResponse::error("Student not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
 
         } catch (Exception $exception) {
 
@@ -126,11 +126,11 @@ class StudentController extends Controller
 
             $student = $this->studentService->changeStatus($request, $id);
 
-            return GlobalResponse::success($student, "Student year status updated successfully", Response::HTTP_OK);
+            return GlobalResponse::success($student, "Student status updated successfully", Response::HTTP_OK);
 
         }catch (ModelNotFoundException $exception){
 
-            return GlobalResponse::error("Student year not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
+            return GlobalResponse::error("Student not found.", $exception->getMessage(), Response::HTTP_NOT_FOUND);
 
         }catch (Exception $exception){
 

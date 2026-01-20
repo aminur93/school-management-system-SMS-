@@ -20,6 +20,8 @@ use App\Http\Services\Api\V1\Admin\Section\SectionService;
 use App\Http\Services\Api\V1\Admin\Section\SectionServiceImpl;
 use App\Http\Services\Api\V1\Admin\Student\StudentService;
 use App\Http\Services\Api\V1\Admin\Student\StudentServiceImpl;
+use App\Http\Services\Api\V1\Admin\StudentDropout\StudentDropoutService;
+use App\Http\Services\Api\V1\Admin\StudentDropout\StudentDropoutServiceImpl;
 use App\Http\Services\Api\V1\Admin\StudentEnrollment\StudentEnrollmentService;
 use App\Http\Services\Api\V1\Admin\StudentEnrollment\StudentEnrollmentServiceImpl;
 use App\Http\Services\Api\V1\Admin\StudentPromotion\StudentPromotionService;
@@ -107,6 +109,11 @@ class ServiceBindingProvider extends ServiceProvider
         $this->app->bind(
             TransferCertificateService::class,
             TransferCertificateServiceImpl::class
+        );
+
+        $this->app->bind(
+            StudentDropoutService::class,
+            StudentDropoutServiceImpl::class
         );
     }
 

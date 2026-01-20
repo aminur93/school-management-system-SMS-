@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Admin\SchoolClassController;
 use App\Http\Controllers\Api\V1\Admin\SchoolController;
 use App\Http\Controllers\Api\V1\Admin\SectionController;
 use App\Http\Controllers\Api\V1\Admin\StudentController;
+use App\Http\Controllers\Api\V1\Admin\StudentDropoutController;
 use App\Http\Controllers\Api\V1\Admin\StudentEnrollmentController;
 use App\Http\Controllers\Api\V1\Admin\StudentPromotionController;
 use App\Http\Controllers\Api\V1\Admin\TransferCertificateController;
@@ -50,6 +51,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*Student dropout route start*/
+    Route::get('student-dropout', [StudentDropoutController::class, 'index']);
+    Route::post('student-dropout', [StudentDropoutController::class, 'store']);
+    Route::get('student-dropout/{id}', [StudentDropoutController::class, 'show']);
+    Route::put('student-dropout/{id}', [StudentDropoutController::class, 'update']);
+    Route::patch('student-dropout/{id}', [StudentDropoutController::class, 'changeStatus']);
+    Route::delete('student-dropout/{id}', [StudentDropoutController::class, 'destroy']);
+    /*Student dropout route end*/
 
     /*transfer certificate route start*/
     Route::get('transfer-certificate', [TransferCertificateController::class, 'index']);
