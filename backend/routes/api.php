@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Admin\SchoolClassController;
 use App\Http\Controllers\Api\V1\Admin\SchoolController;
 use App\Http\Controllers\Api\V1\Admin\SectionController;
 use App\Http\Controllers\Api\V1\Admin\StudentController;
+use App\Http\Controllers\Api\V1\Admin\StudentDocumentController;
 use App\Http\Controllers\Api\V1\Admin\StudentDropoutController;
 use App\Http\Controllers\Api\V1\Admin\StudentEnrollmentController;
 use App\Http\Controllers\Api\V1\Admin\StudentPromotionController;
@@ -51,6 +52,15 @@ Route::group(['prefix' => 'v1/auth', 'middleware' => 'throttle:api'], function()
  * Admin api route start
 */
 Route::group(['prefix' => 'v1/admin'], function(){
+
+    /*student document rouet start*/
+    Route::get('student-document', [StudentDocumentController::class, 'index']);
+    Route::post('student-document', [StudentDocumentController::class, 'store']);
+    Route::get('student-document/{id}', [StudentDocumentController::class, 'show']);
+    Route::put('student-document/{id}', [StudentDocumentController::class, 'update']);
+    Route::patch('student-document/{id}', [StudentDocumentController::class, 'verifiy']);
+    Route::delete('student-document/{id}', [StudentDocumentController::class, 'destroy']);
+    /*student document rouet end*/
 
     /*Student dropout route start*/
     Route::get('student-dropout', [StudentDropoutController::class, 'index']);

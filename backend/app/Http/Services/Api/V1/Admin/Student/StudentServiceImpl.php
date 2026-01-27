@@ -15,7 +15,7 @@ class StudentServiceImpl implements StudentService
     {
         $student = Student::with('school', 'schoolClass', 'medium', 'section', 'academic');
 
-         // Sorting (secure)
+        // Sorting (secure)
         $sortableColumns = ['id', 'first_name', 'email', 'phone', 'created_at'];
 
         $sortBy = $request->get('sortBy', 'id');
